@@ -4,7 +4,7 @@
 		"type": "None"
 	},
 	"from": {
-		"table": "emp"
+		"table": "timesheet"
 	},
 	"join": {
 	},
