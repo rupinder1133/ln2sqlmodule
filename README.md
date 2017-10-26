@@ -1,4 +1,7 @@
-# ln2sql
+# ln2sqlmodule
+This is an adoption of the awesome [ln2sql](https://github.com/FerreroJeremy/ln2sql) by [Jérémy Ferrero](https://github.com/FerreroJeremy) as a python module so that people can easily use it to create some awesome things !
+
+#ln2sql
 
 <b>ln2sql is a NLP tool to query a database in natural language.</b> The tool takes in input a database model and a sentence and translate the latter in a valid SQL statement able to query the input data model.
 
