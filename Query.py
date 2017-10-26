@@ -122,7 +122,7 @@ class From():
 		return self.table
 
 	def __str__(self):
-		return '\n' + color.BOLD + 'FROM ' + color.END + str(self.table)
+		return ' ' + color.BOLD + 'FROM ' + color.END + str(self.table)
 
 	def print_json(self, output):
 		if self.table != '':
@@ -158,13 +158,13 @@ class Join():
 		if len(self.links) >= 1:
 			string = ''
 			for i in range(0, len(self.links)):
-				string += '\n' + color.BOLD + 'INNER JOIN ' + color.END + str(self.links[i][2]) + '\n' + color.BOLD + 'ON ' + color.END + str(self.links[i][0]) + '.' + str(self.links[i][1]) + ' = ' + str(self.links[i][2]) + '.' + str(self.links[i][1])
+				string += ' ' + color.BOLD + 'INNER JOIN ' + color.END + str(self.links[i][2]) + ' ' + color.BOLD + 'ON ' + color.END + str(self.links[i][0]) + '.' + str(self.links[i][1]) + ' = ' + str(self.links[i][2]) + '.' + str(self.links[i][1])
 			return string
 		elif len(self.tables) >= 1:
 			if len(self.tables) == 1:
-				return '\n' + color.BOLD + 'NATURAL JOIN ' + color.END + self.tables[0]
+				return ' ' + color.BOLD + 'NATURAL JOIN ' + color.END + self.tables[0]
 			else:
-				string = '\n' + color.BOLD + 'NATURAL JOIN ' + color.END
+				string = ' ' + color.BOLD + 'NATURAL JOIN ' + color.END
 				for i in range(0, len(self.tables)):
 					if i == (len(self.tables)-1):
 						string += str(self.tables[i])
@@ -265,9 +265,9 @@ class Where():
 		if len(self.conditions) >= 1:
 			for i in range(0, len(self.conditions)):
 				if i == 0:
-					string += '\n' + color.BOLD + 'WHERE' + color.END + ' ' + str(self.conditions[i][1])
+					string += ' ' + color.BOLD + 'WHERE' + color.END + ' ' + str(self.conditions[i][1])
 				else:
-					string += '\n' + color.BOLD + str(self.conditions[i][0]) + color.END + ' ' + str(self.conditions[i][1])
+					string += ' ' + color.BOLD + str(self.conditions[i][0]) + color.END + ' ' + str(self.conditions[i][1])
 			return string
 		else:
 			return string
@@ -320,7 +320,7 @@ class GroupBy():
 
 	def __str__(self):
 		if self.column is not None:
-			return '\n' + color.BOLD + 'GROUP BY ' + color.END + str(self.column)
+			return ' ' + color.BOLD + 'GROUP BY ' + color.END + str(self.column)
 		else:
 			return ''
 
@@ -379,7 +379,7 @@ class OrderBy():
 				string += color.BOLD + ' ASC' + color.END
 			else:
 				string += color.BOLD + ' ASC' + color.END
-			return '\n' + string
+			return ' ' + string
 		else:
 			return ''
 
@@ -476,7 +476,7 @@ class Query():
 		return self.order_by
 
 	def __str__(self):
-		return '\n' + str(self.select) + str(self._from) + str(self.join) + str(self.where) + str(self.group_by) + str(self.order_by) + ';\n'
+		return str(self.select) + str(self._from) + str(self.join) + str(self.where) + str(self.group_by) + str(self.order_by) + ';'
 
 	def print_json(self, filename="output.json"):
 		output = open(filename, 'a')

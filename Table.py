@@ -2,6 +2,7 @@
 
 import sys
 import unicodedata
+import settings
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -14,7 +15,9 @@ class Table:
     primary_keys = []
     
     def __init__(self, name=None, columns=None, primary_keys=None):
-        print 'name=%s columns=%s primary_keys=%s' % (name,columns,primary_keys) 
+        if settings.DEBUG:
+            print 'name=%s columns=%s primary_keys=%s' % (name,columns,primary_keys)
+
         if name is None:
             self.name = ''
         else:
@@ -52,5 +55,6 @@ class Table:
         return self.primary_keys
 
     def add_primary_key(self, primary_key):
-        print '%s : primary key added:%s' % (self.name, primary_key)
+        if settings.DEBUG:
+            print '%s : primary key added:%s' % (self.name, primary_key)
         self.primary_keys.append(primary_key)

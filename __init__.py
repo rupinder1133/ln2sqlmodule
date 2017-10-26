@@ -1,8 +1,9 @@
 from ln2sql import main as __main__
 import re
+import os
 
 
-def getSql(query):
+def getSql(query,sqlDump):
     # unit test
     # args = ['-d', 'ln2sqlmodule/emp_dump.sql', '-l', 'ln2sqlmodule/lang/english.csv', '-i', query, '-j', 'ln2sqlmodule/output.json','-x']
     # args = ['-d', 'ln2sqlmodule/emp_dump.sql', 'ln2sqlmodule/lang/english.csv', '-i', query, '-j', 'ln2sqlmodule/output.json']
@@ -10,18 +11,17 @@ def getSql(query):
     # args = ['-d', 'ln2sqlmodule/timesheet.sql', '-l',
     #         'ln2sqlmodule/lang/english.csv', '-i', query, '-j', 'ln2sqlmodule/output.json']
 
-    args = ['-d', 'ln2sqlmodule/heyzot-analytics.sql',
-            '-l', 'ln2sqlmodule/lang/english.csv', 
+    args = ['-d', sqlDump,
+            '-l', os.path.dirname(os.path.abspath(__file__)) + '/lang/english.csv', 
             '-i', query, 
-            '-j', 'ln2sqlmodule/output.json']
+            '-j', os.path.dirname(os.path.abspath(__file__)) + '/output.json']
 
     sql = __main__(args)
 
     return str(sql)
 
-
-def getSql_like(query):
-    sql = getSql(query)
+def getSql_like(query,sqlDump):
+    sql = getSql(query,sqlDump)
 
     sql = sql.replace('=', 'LIKE')
 

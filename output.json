@@ -1,19 +1,12 @@
 {
 	"select": {
-		"columns": [
-			{ "column": "cityName",
-			  "type": "None"
-			},
-			{ "column": "name",
-			  "type": "None"
-			}
-		]
+		"column": "None",
+		"type": "None"
 	},
 	"from": {
 		"table": "emp"
 	},
 	"join": {
-		"table": "city"
 	},
 	"where": {
 	},
