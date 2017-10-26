@@ -1,0 +1,24 @@
+{
+	"select": {
+		"columns": [
+			{ "column": "cityName",
+			  "type": "None"
+			},
+			{ "column": "name",
+			  "type": "None"
+			}
+		]
+	},
+	"from": {
+		"table": "emp"
+	},
+	"join": {
+		"table": "city"
+	},
+	"where": {
+	},
+	"group_by": {
+	},
+	"order_by": {
+	}
+}
