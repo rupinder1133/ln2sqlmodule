@@ -47,7 +47,7 @@ This is an adoption of the awesome [ln2sql](https://github.com/FerreroJeremy/ln2
 
  
 
-# **outputFile** Schema
+### outputFile Schema
 	
 	    {
 			"select": {
