@@ -3,7 +3,7 @@ import re
 import os
 
 
-def getSql(query,sqlDump):
+def getSql(query, sqlDump, outputFile=None):
     # unit test
     # args = ['-d', 'ln2sqlmodule/emp_dump.sql', '-l', 'ln2sqlmodule/lang/english.csv', '-i', query, '-j', 'ln2sqlmodule/output.json','-x']
     # args = ['-d', 'ln2sqlmodule/emp_dump.sql', 'ln2sqlmodule/lang/english.csv', '-i', query, '-j', 'ln2sqlmodule/output.json']
@@ -14,14 +14,14 @@ def getSql(query,sqlDump):
     args = ['-d', sqlDump,
             '-l', os.path.dirname(os.path.abspath(__file__)) + '/lang/english.csv', 
             '-i', query, 
-            '-j', os.path.dirname(os.path.abspath(__file__)) + '/output.json']
+            '-j', outputFile]
 
     sql = __main__(args)
 
     return str(sql)
 
-def getSql_like(query,sqlDump):
-    sql = getSql(query,sqlDump)
+def getSql_like(query, sqlDump, outputFile=None):
+    sql = getSql(query, sqlDump, outputFile)
 
     sql = sql.replace('=', 'LIKE')
 

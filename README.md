@@ -9,12 +9,15 @@ This is an adoption of the awesome [ln2sql](https://github.com/FerreroJeremy/ln2
 
 # USAGE
 
-- **ln2sqlmodule.getSql(query,sqlDump)**
+- **ln2sqlmodule.getSql(query, sqlDump[, outputFile])**
 	returns SQL query from natural language query
+	
+	[**outputFile** Schema](#outputfile-schema)
 
 	    Parameters :
 			query      :    query in natural language
-			sqlDump    :    path to sql dump file           
+			sqlDump    :    path to sql dump file    
+			outputFile :    path to file to output SQL query in json       
 		
 		returns : 
 			SQL query string
@@ -23,8 +26,10 @@ This is an adoption of the awesome [ln2sql](https://github.com/FerreroJeremy/ln2
 			ln2sqlmodule.getSql("get name of all emp","./emp.sql")
 			-> SELECT name FROM  emp
 
-- **ln2sqlmodule.getSql_like(query,sqlDump)**
+- **ln2sqlmodule.getSql_like(query, sqlDump)**
 	returns SQL query from natural language with **LIKE** with **%** in **WHERE** clause
+	
+	[**outputFile** Schema](#outputfile-schema)
 
 	    Parameters :
 			query      :    query in natural language
@@ -41,3 +46,23 @@ This is an adoption of the awesome [ln2sql](https://github.com/FerreroJeremy/ln2
 			-> SELECT * FROM  emp WHERE name LIKE '%abc%xyz'
 
  
+
+# **outputFile** Schema
+	
+	    {
+			"select": {
+				"column": "",
+				"type": ""
+			},
+			"from": {
+				"table": ""
+			},
+			"join": {
+			},
+			"where": {
+			},
+			"group_by": {
+			},
+			"order_by": {
+			}
+		}
