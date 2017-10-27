@@ -49,8 +49,7 @@ INSERT INTO `city` (`id`, `cityName`) VALUES
 --
 
 CREATE TABLE `emp` (
-  `id` int(11) NOT NULL, 
-  PRIMARY KEY (`id`),
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `cityId` int(11) NOT NULL,
   `score` int(11) NOT NULL

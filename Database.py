@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 
-import sys, re
+import sys
+import re
 import unicodedata
 
 from Table import Table
@@ -8,6 +9,7 @@ import settings
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
+
 
 class color:
     PURPLE = '\033[95m'
@@ -21,17 +23,18 @@ class color:
     UNDERLINE = '\033[4m'
     END = '\033[0m'
 
+
 class Database:
-    
+
     def __init__(self):
         self.tables = []
-    
+
     def get_number_of_tables(self):
         return len(self.tables)
-    
+
     def get_tables(self):
         return self.tables
-    
+
     def get_tables_into_dictionnary(self):
         data = {}
         for table in self.tables:
@@ -53,15 +56,23 @@ class Database:
 
     def add_table(self, table):
         self.tables.append(table)
-    
+
     def load(self, path):
         with open(path) as f:
             content = f.read()
-            tables_string = [p.split(';')[0] for p in content.split('CREATE') if ';' in p]
+
+            tables_string = [p.split(';')[0]
+                             for p in content.split('CREATE') if ';' in p]
             for table_string in tables_string:
                 if 'TABLE' in table_string:
                     table = self.create_table(table_string)
                     self.add_table(table)
+
+            alter_table_string = [p.split(';')[0]
+                                  for p in content.split('ALTER') if ';' in p]
+            for s in alter_table_string:
+                if 'TABLE' in s:
+                    self.alter_table(s)
 
     def predict_type(self, string):
         if 'int' in string.lower():
@@ -91,18 +102,40 @@ class Database:
                     table.add_column(column_name.group(1), column_type)
         return table
 
+    def alter_table(self, alter_string):
+        lines = alter_string.replace('\n', ' ').split(';')
+        for line in lines:
+            if 'PRIMARY KEY' in line:
+                table_name = re.search("TABLE `(\w+)`", line).group(1)
+                table = [t for t in self.tables if t.get_name() == table_name][
+                    0]
+
+                primary_key_columns = re.findall(
+                    "PRIMARY KEY \(`(\w+)`\)", line)
+                for primary_key_column in primary_key_columns:
+                    table.add_primary_key(primary_key_column)
+            elif 'FOREIGN KEY' in line:
+                table_name = re.search("TABLE `(\w+)`", line).group(1)
+                table = [t for t in self.tables if t.get_name() == table_name][
+                    0]
+
+                foreign_keys_list = re.findall(
+                    "FOREIGN KEY \(`(\w+)`\) REFERENCES `(\w+)` \(`(\w+)`\)", line)
+
+                for col, ref_table, ref_col in foreign_keys_list:
+                    table.add_foreign_key(col, ref_table, ref_col)
+
     def print_me(self):
-        if settings.DEBUG :
+        if settings.DEBUG:
             for table in self.tables:
                 print('+-------------------------------------+')
                 print("| %25s           |" % (table.name.upper()))
                 print('+-------------------------------------+')
                 for column in table.columns:
                     if column.name in table.primary_keys:
-                        print("| 🔑 %31s           |" % (color.BOLD + column.name + ' (' + column.type + ')' + color.END))
+                        print("| 🔑 %31s           |" % (
+                            color.BOLD + column.name + ' (' + column.type + ')' + color.END))
                     else:
-                        print("|   %23s           |" % (column.name + ' (' + column.type + ')'))
+                        print("|   %23s           |" %
+                              (column.name + ' (' + column.type + ')'))
                 print('+-------------------------------------+\n')
-
-
-

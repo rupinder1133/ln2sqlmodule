@@ -13,10 +13,9 @@ class Table:
     name = ''
     columns = []
     primary_keys = []
+    foreign_keys = []
     
     def __init__(self, name=None, columns=None, primary_keys=None):
-        if settings.DEBUG:
-            print 'name=%s columns=%s primary_keys=%s' % (name,columns,primary_keys)
 
         if name is None:
             self.name = ''
@@ -58,3 +57,16 @@ class Table:
         if settings.DEBUG:
             print '%s : primary key added:%s' % (self.name, primary_key)
         self.primary_keys.append(primary_key)
+
+    def get_number_of_foreign_keys(self):
+        return len(self.foreign_keys)
+
+    def get_foreign_keys(self):
+        return self.foreign_keys
+
+    def add_foreign_key(self, col, ref_table, ref_col):
+        if settings.DEBUG:
+            print 'foreign key added : %s.%s->%s.%s' % (self.name, col, ref_table, ref_col)
+        self.foreign_keys.append({'col':col,'ref_table':ref_table,'ref_col':ref_col})
+
+

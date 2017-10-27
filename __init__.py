@@ -12,7 +12,7 @@ def getSql(query, sqlDump, outputFile=None):
     #         'ln2sqlmodule/lang/english.csv', '-i', query, '-j', 'ln2sqlmodule/output.json']
 
     args = ['-d', sqlDump,
-            '-l', os.path.dirname(os.path.abspath(__file__)) + '/lang/english.csv', 
+            '-l', os.path.dirname(os.path.abspath(__file__)) + '/lang/english.csv',
             '-i', query, 
             '-j', outputFile]
 
