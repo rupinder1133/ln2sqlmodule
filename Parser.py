@@ -117,8 +117,10 @@ class FromParser(Thread):
         return tmp_table
 
     def intersect(self, a, b):
-        print 'intersect : a=%s b=%s' % (a,b)
         return list(set(a) & set(b))
+
+    def find_fk(self, a, b):
+        pass
 
     def difference(self, a, b):
         differences = []
@@ -128,16 +130,28 @@ class FromParser(Thread):
         return differences
 
     def is_direct_join_is_possible(self, table_src, table_trg):
-        join = []
-        pk_table_src = self.database_object.get_primary_keys_of_table(table_src)
-        pk_table_trg = self.database_object.get_primary_keys_of_table(table_trg)
-        match_pk_table_src_with_table_trg = self.intersect(pk_table_src, self.database_dico[table_trg])
-        match_pk_table_trg_with_table_src = self.intersect(pk_table_trg, self.database_dico[table_src])
+        # pk_table_src = self.database_object.get_primary_keys_of_table(table_src)
+        # pk_table_trg = self.database_object.get_primary_keys_of_table(table_trg)
+        # match_pk_table_src_with_table_trg = self.intersect(pk_table_src, self.database_dico[table_trg])
+        # match_pk_table_trg_with_table_src = self.intersect(pk_table_trg, self.database_dico[table_src])
         
-        if len(match_pk_table_src_with_table_trg) >=1:
-            return [table_src, match_pk_table_src_with_table_trg[0], table_trg]
-        elif len(match_pk_table_trg_with_table_src) >= 1:
-            return [table_src, match_pk_table_trg_with_table_src[0], table_trg]
+        # if len(match_pk_table_src_with_table_trg) >=1:
+        #     return [table_src, match_pk_table_src_with_table_trg[0], table_trg]
+        # elif len(match_pk_table_trg_with_table_src) >= 1:
+        #     return [table_src, match_pk_table_trg_with_table_src[0], table_trg]
+
+
+
+        fk_table_src = self.database_object.get_foreign_keys_of_table(table_src)
+        fk_table_trg = self.database_object.get_foreign_keys_of_table(table_trg)
+
+        for fk_dict in fk_table_src:
+            if fk_dict['ref_table'] == table_trg:
+                return [(table_src,fk_dict['col']), (table_trg,fk_dict['ref_col'])]
+
+        for fk_dict in fk_table_trg:
+            if fk_dict['ref_table'] == table_src:
+                return [(table_trg,fk_dict['col']), (table_src, fk_dict['ref_col'])]
 
     def get_all_direct_linked_tables_of_a_table(self, table_src):
         links = []
@@ -154,19 +168,19 @@ class FromParser(Thread):
 
         differences = []
         for join in links:
-            if join[2] not in historic:
-               differences.append(join)
+            if join[1][0] not in historic:
+                differences.append(join)
         links = differences 
 
         for join in links:
-            if join[2] == table_trg:
+            if join[1][0] == table_trg:
                 return [0, join]
 
         path = []
         historic.append(table_src)
 
         for join in links:
-            result = [1, self.is_join(historic, join[2], table_trg)]
+            result = [1, self.is_join(historic, join[1][0], table_trg)]
             if result[1] != []:
                 if result[0] == 0:
                     path.append(result[1])
@@ -214,6 +228,7 @@ class FromParser(Thread):
                     join_object.add_table(foreign_table)
                     link = self.get_link(table_of_from, foreign_table)
                     links.extend(link)
+
             join_object.set_links(self.unique_ordered(links))
             query.set_join(join_object)
             self.queries.append(query)

@@ -158,7 +158,7 @@ class Join():
 		if len(self.links) >= 1:
 			string = ''
 			for i in range(0, len(self.links)):
-				string += ' ' + color.BOLD + 'INNER JOIN ' + color.END + str(self.links[i][2]) + ' ' + color.BOLD + 'ON ' + color.END + str(self.links[i][0]) + '.' + str(self.links[i][1]) + ' = ' + str(self.links[i][2]) + '.' + str(self.links[i][1])
+				string += ' ' + 'INNER JOIN ' + str(self.links[i][1][0]) + ' ' + 'ON ' + str(self.links[i][0][0]) + '.' + str(self.links[i][0][1]) + ' = ' + str(self.links[i][1][0]) + '.' + str(self.links[i][1][1])
 			return string
 		elif len(self.tables) >= 1:
 			if len(self.tables) == 1:

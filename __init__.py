@@ -23,7 +23,9 @@ def getSql(query, sqlDump, outputFile=None):
 def getSql_like(query, sqlDump, outputFile=None):
     sql = getSql(query, sqlDump, outputFile)
 
-    sql = sql.replace('=', 'LIKE')
+    sql = re.sub("(WHERE \S+ )=",r'\g<1>LIKE', sql)
+    sql = re.sub("(AND \S+ )=",r'\g<1>LIKE', sql)
+    sql = re.sub("(OR \S+ )=",r'\g<1>LIKE', sql)
 
     # 'abc def' -> '%abc%def%'
     for i in re.findall("'(.*?)'", sql):

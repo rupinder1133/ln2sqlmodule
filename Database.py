@@ -54,6 +54,11 @@ class Database:
             if _table.name == table:
                 return _table.primary_keys
 
+    def get_foreign_keys_of_table(self, table):
+        for _table in self.tables:
+            if _table.name == table:
+                return _table.get_foreign_keys()
+
     def add_table(self, table):
         self.tables.append(table)
 
