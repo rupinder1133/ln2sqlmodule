@@ -33,7 +33,8 @@ class Testln2sql(unittest.TestCase):
             {
                 "input": "cityName and score for emp with id = 2",
                 "output": "SELECT city.cityName, emp.score FROM emp INNER JOIN city ON emp.cityId = city.id WHERE emp.id = '2';"
-            }
+            },
+
         ]
 
         for test in tests:

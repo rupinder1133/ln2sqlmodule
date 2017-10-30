@@ -2,6 +2,13 @@
 
 This is an adoption of the awesome [ln2sql](https://github.com/FerreroJeremy/ln2sql) by [Jérémy Ferrero](https://github.com/FerreroJeremy) as a python module so that people can easily use it to create some awesome things !
 
+Things added in ln2sqlmodule :
+
+- API for getting WHERE queries with LIKE and '%'
+- INNER JOIN working correctly with FOREIGN KEY
+- PRIMARY KEY and FOREIGN KEY detection from ALTER STATEMENT
+- Value extraction from natural language
+
 # INSTALLATION
 
 - Download, unzip and place in your project directory
