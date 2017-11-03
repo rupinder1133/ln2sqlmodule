@@ -632,7 +632,7 @@ class Parser:
             for filter_element in filter_list:
                 irext=irext.replace(filter_element," ")
 
-            assignment_list=[" equals to "," equal to ","="," is ",":"," equals "," equal "]
+            assignment_list=[" equals to "," equal to ","="," is ",":"," equals "," equal "," than "]
             maverickjoy_assigner_convention ="res@3#>>"
             
             for assigners in assignment_list :
