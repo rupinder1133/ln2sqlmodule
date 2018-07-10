@@ -33,14 +33,15 @@ Things added in ln2sqlmodule :
 			ln2sqlmodule.getSql("get name of all emp","./emp.sql")
 			-> SELECT name FROM  emp
 
-- **ln2sqlmodule.getSql_like(query, sqlDump)**
+- **ln2sqlmodule.getSql_like(query, sqlDump[, outputFile])**
 	returns SQL query from natural language with **LIKE** with **%** in **WHERE** clause
 	
 	[**outputFile** Schema](#outputfile-schema)
 
 	    Parameters :
 			query      :    query in natural language
-			sqlDump    :    path to sql dump file           
+			sqlDump    :    path to sql dump file
+			outputFile :    path to file to output SQL query in json   
 		
 		returns : 
 			SQL query string with LIKE
