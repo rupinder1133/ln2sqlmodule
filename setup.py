@@ -4,7 +4,7 @@ setup(
     packages = ['ln2sqlmodule'],
     version = '0.0.1',
     license='gpl-3.0',
-    description = 'This is a wrapper around ln2sql by Jérémy Ferrero for convenient use',
+    description = 'This is a wrapper around ln2sql by Jeremy Ferrero for convenient use',
     author = 'Rupinder Singh',
     author_email = 'rupinder1133@gmail.com',
     url = 'https://github.com/rupinder1133',
