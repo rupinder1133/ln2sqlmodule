@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 from os import path
 
 this_directory = path.abspath(path.dirname(__file__))
@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md')) as f:
 setup(
     name = 'ln2sqlmodule',
     packages = ['ln2sqlmodule'],
-    version = 'v0.0.3',
+    version = 'v0.0.4',
     license='gpl-3.0',
     description = 'This is a wrapper around ln2sql by Jeremy Ferrero for convenient use',
     long_description=long_description,
@@ -16,7 +16,7 @@ setup(
     author = 'Rupinder Singh',
     author_email = 'rupinder1133@gmail.com',
     url = 'https://github.com/rupinder1133/ln2sqlmodule',
-    download_url = 'https://github.com/rupinder1133/ln2sqlmodule/archive/v0.0.3.tar.gz',
+    download_url = 'https://github.com/rupinder1133/ln2sqlmodule/archive/v0.0.4.tar.gz',
     keywords = ['ln2sql', 'NLP', 'SQL'],
     install_requires=[],
     classifiers=[
