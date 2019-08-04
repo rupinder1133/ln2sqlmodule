@@ -8,7 +8,7 @@ setup(
     author = 'Rupinder Singh',
     author_email = 'rupinder1133@gmail.com',
     url = 'https://github.com/rupinder1133',
-    download_url = 'https://github.com/rupinder1133/ln2sqlmodule',    # I explain this later on
+    download_url = 'https://github.com/rupinder1133/ln2sqlmodule/archive/v0.0.1.tar.gz',
     keywords = ['ln2sql', 'NLP', 'SQL'],
     install_requires=[],
     classifiers=[
